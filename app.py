@@ -14,6 +14,16 @@ def get_db_connection():
     conn = psycopg2.connect(host=DB_HOST, database=DB_NAME, user=DB_USER, password=DB_PASS)
     return conn
 
+@app.route('/items', methods=['GET'])
+def list_items():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM items;")
+    items = cur.fetchall()
+    cur.close()
+    conn.close()
+    return jsonify(items), 200
+
 @app.route('/items', methods=['POST'])
 def create_item():
     data = request.json

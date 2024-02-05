@@ -1,6 +1,6 @@
 _format_version: "2.1"
 services:
-- name: "item-service"
+- name: "items"
   url: http://app:5000
   routes:
   - name: post-item
@@ -8,35 +8,35 @@ services:
       - POST
     paths:
     - /items
-    strip_path: true
+    strip_path: false
   - name: put-item
     methods:
       - PUT
     paths:
     - /items
-    strip_path: true
+    strip_path: false
 plugins:
 - name: kong-event-pub
   route: post-item
   config:
-    bootstrap_servers: ""
+    bootstrap_servers: "pkc-7xoy1.eu-central-1.aws.confluent.cloud"
     port: 9092
     ssl: true
     sasl_mechanism: "PLAIN"
-    sasl_user: ""
-    sasl_password: ""
+    sasl_user: "CMB2JQ4DGCWHZQFX"
+    sasl_password: "kw7sipSn5AOLes6xggdjf99xFlDyA+1Qe849hYZl0Xp4LN2mrqj/c9Fgiv9Vm2/E"
     #encoding: "application/json"
     eventval: '{"specversion": "1.0", "id": "{{ request.correlation_id }}", "source": "{{ client.ip }}", "request": "{{ request }}", "response": "{{ response }}", "consumer": "{{ consumer }}", "route": "{{ route }}", "service": "{{ service }}"}'
     topic: 'post-item'
 - name: kong-event-pub
   route: put-item
   config:
-    bootstrap_servers: ""
+    bootstrap_servers: "pkc-7xoy1.eu-central-1.aws.confluent.cloud"
     port: 9092
     ssl: true
     sasl_mechanism: "PLAIN"
-    sasl_user: ""
-    sasl_password: ""
+    sasl_user: "CMB2JQ4DGCWHZQFX"
+    sasl_password: "kw7sipSn5AOLes6xggdjf99xFlDyA+1Qe849hYZl0Xp4LN2mrqj/c9Fgiv9Vm2/E"
     #encoding: "application/json"
     eventval: '{"specversion": "1.0", "id": "{{ request.correlation_id }}", "source": "{{ client.ip }}", "request": "{{ request }}", "response": "{{ response }}", "consumer": "{{ consumer }}", "route": "{{ route }}", "service": "{{ service }}"}'
     topic: 'put-item'
