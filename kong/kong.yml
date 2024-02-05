@@ -23,8 +23,8 @@ plugins:
     port: 9092
     ssl: true
     sasl_mechanism: "PLAIN"
-    sasl_user: "CMB2JQ4DGCWHZQFX"
-    sasl_password: "kw7sipSn5AOLes6xggdjf99xFlDyA+1Qe849hYZl0Xp4LN2mrqj/c9Fgiv9Vm2/E"
+    sasl_user: ""
+    sasl_password: ""
     #encoding: "application/json"
     eventval: '{"specversion": "1.0", "id": "{{ request.correlation_id }}", "source": "{{ client.ip }}", "request": "{{ request }}", "response": "{{ response }}", "consumer": "{{ consumer }}", "route": "{{ route }}", "service": "{{ service }}"}'
     topic: 'post-item'
@@ -35,8 +35,8 @@ plugins:
     port: 9092
     ssl: true
     sasl_mechanism: "PLAIN"
-    sasl_user: "CMB2JQ4DGCWHZQFX"
-    sasl_password: "kw7sipSn5AOLes6xggdjf99xFlDyA+1Qe849hYZl0Xp4LN2mrqj/c9Fgiv9Vm2/E"
+    sasl_user: ""
+    sasl_password: ""
     #encoding: "application/json"
     eventval: '{"specversion": "1.0", "id": "{{ request.correlation_id }}", "source": "{{ client.ip }}", "request": "{{ request }}", "response": "{{ response }}", "consumer": "{{ consumer }}", "route": "{{ route }}", "service": "{{ service }}"}'
     topic: 'put-item'
