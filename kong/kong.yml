@@ -1,0 +1,42 @@
+_format_version: "2.1"
+services:
+- name: "item-service"
+  url: http://app:5000
+  routes:
+  - name: post-item
+    methods:
+      - POST
+    paths:
+    - /items
+    strip_path: true
+  - name: put-item
+    methods:
+      - PUT
+    paths:
+    - /items
+    strip_path: true
+plugins:
+- name: kong-event-pub
+  route: post-item
+  config:
+    bootstrap_servers: ""
+    port: 9092
+    ssl: true
+    sasl_mechanism: "PLAIN"
+    sasl_user: ""
+    sasl_password: ""
+    #encoding: "application/json"
+    eventval: '{"specversion": "1.0", "id": "{{ request.correlation_id }}", "source": "{{ client.ip }}", "request": "{{ request }}", "response": "{{ response }}", "consumer": "{{ consumer }}", "route": "{{ route }}", "service": "{{ service }}"}'
+    topic: 'post-item'
+- name: kong-event-pub
+  route: put-item
+  config:
+    bootstrap_servers: ""
+    port: 9092
+    ssl: true
+    sasl_mechanism: "PLAIN"
+    sasl_user: ""
+    sasl_password: ""
+    #encoding: "application/json"
+    eventval: '{"specversion": "1.0", "id": "{{ request.correlation_id }}", "source": "{{ client.ip }}", "request": "{{ request }}", "response": "{{ response }}", "consumer": "{{ consumer }}", "route": "{{ route }}", "service": "{{ service }}"}'
+    topic: 'put-item'
